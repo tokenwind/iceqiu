@@ -1,0 +1,7 @@
+about eclipse issues:
+安装企业版的eclipse IDE :eclipse IDE for enterprise Java developers
+这个可以使用Tomcat server服务器的版本9.
+
+使用这个eclipse的问题有一些。写的servletDemo 程序会需要从Tomcat中的 web.xml 中复制这个文件，并写配置文件，这个不是很方便。
+暂时还未找方法去解决这个问题。
+另外使用测试的时候，需要注意，随时关闭server，这样子可以减轻电脑的负担，并且如果重新写一个html或者jsp 等内容的话，方便去测试。
