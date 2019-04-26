@@ -1,0 +1,7 @@
+ 请求重定向。
+ getRequestDispatcher("").forward(request,response);
+ 重定向是在服务器端本应用下完成的重定向。无法通过这个重定向访问其他服务器的资源。 方法是在ServletRequest接口中的。
+ 
+ 
+ 请求转发。
+ sendRedirect(""); location 是访问外部浏览器资源的。所以给定的参数里面的外部的路径值要加上http://
