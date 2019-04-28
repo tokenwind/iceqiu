@@ -1,0 +1,31 @@
+    出现Cookie和Session的原因是：由于http是无状态的网络连接协议。那么在brower 访问server 上面的应用时候，server无法记录browers的信息，在提供service时候
+会比较的慢。对于企业来说也无法关注到哪些客户访问了多少次service。
+    在此条件下就应运而生。
+    在Java web 应用开发中。cookie是如何产生的呢。它能保存什么信息。什么应用能打开它呢。
+    当服务器第一次访问一个应用service时候，容器会产生一个response，根据 void javax.servlet.http.HttpServlet 中的 addCookie(Cookie cookie)method方法添加
+    
+    一个Cookie 文本片段给brower.brower 在访问相同的服务的时候就将这个Cookie发给服务器。服务器根据此来返回给浏览器资源。
+    Cookie 主要是为Servlet service服务的。
+    那Cookie自己是什么样的呢：Cookie.
+    public class Cookie
+    extends Object
+    implements Cloneable, Serializable
+    
+    he browser is expected to support 20 cookies for each Web server, 300 cookies total, and may limit cookie size to 4 KB each
+    
+    Cookie的特点是：1.cookie 本身的name一创建就无法修改了。原因是构造方法中Cookie（String name ,String value),方法本身并没有提供setName 方法。
+                                                        原理就是response.addHeader("Set-Cookie：cookie=aaa")
+                   2. String getValue();
+                      String getPath()
+                      String getDomain()
+                      long getMaxAge()
+                      String getComment()
+                      int getVersion()
+                      boolean getSecure() 
+                      
+                      以上都有对应的set 方法。
+                   3.服务器如何获取请求中的Cookie呢:Cookie[] cookie  javax.servlet.ServletRequest 中的 getCookie() method 方法。
+                   4.cookie是保持在客户端的文件信息。
+                   
+      Session 是保存在服务器端的。这个是与cookie不同之处之一。那这也就决定了Session 是如何产生的了。 javax.servlet.http.HttpServletRequest中的 Session
+      getSession()  或者getSession(boolean creat) 如果create 是true，那么就是有就不建，没有就建咯。
