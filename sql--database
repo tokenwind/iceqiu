@@ -23,6 +23,21 @@
     updata table  set table.xx='';
     delete from table 
     
+保证记录的唯一性，通过设置主键的操作来完成。
+create table  t1(
+        job_id int primary key,
+        job varchar(14)
+)
+保证数据结构（亦即是列的唯一性）
+create table t2 (
+        id  int primary key,
+        name varchar(14) not null,
+        name_ID  varchar(100)  unique,
+        f_job_id  int,
+        constraint _job_id_fk foreign key(f_job_id）  references t1(job_id）
+)
+将表t1 和 t2 的主键和外键关联，插入时候注意只有有该主键时候，才能插入成功。
+    
 数据库中的查询的操作;
          其原理是利用笛卡尔积，然后筛选其中的数据。
          select colmn from table where ...
