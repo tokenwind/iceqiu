@@ -1,0 +1,57 @@
+JDBC 
+问题1：JDBC是做什么的，解决了什么问题。
+问题2：JDBC怎么使用
+问题3：使用JDBC的前提是什么？
+
+JDBC：JDBC（Java DataBase Connectivity,java数据库连接）是一种用于执行SQL语句的Java API，
+可以为多种关系数据库提供统一访问，它由一组用Java语言编写的类和接口组成。
+SQL是英文Structured Query Language的缩写，意思为结构化查询语言
+
+数据库驱动：是数据库厂商作为对其他语言调用数据库的设计的开发环境。将其他语言翻译成数据库自己的语言。
+
+问题1：answer JDBC 就是Java中的接口，用来将编写的Java程序 连接到 数据库驱动DBDriver，DBDriver 然后将Java中编写的sql 语句翻译成为数据库自己的语言
+执行数据库的创建，数据源的增删改查等内容。
+
+问题2：answer
+
+java.sql.Driver sql 语句执行在java.sql包中。
+Driver作为一个接口功能是:
+public interface Driver
+The interface that every driver class must implement.  每个driver 接口必须被实现
+The Java SQL framework allows for multiple database drivers.######Java sql 框架提供了各种各样的数据库驱动接口。
+Each driver should supply a class that implements the Driver interface.
+
+Class.forName("foo.bah.Driver")
+foo.bah.Driver  为各个数据库的Driver名。包含包名的。
+
+接口中有个方法： Connection connect（String url, Properties info）
+The Properties argument can be used to pass arbitrary string tag/value pairs as connection arguments.
+Normally at least "user" and "password" properties should be included in the Properties object.
+
+url 是数据库的安装路径
+也可以 写在配置文件中作为一个配置参数进行修改，达到后期如果更改后的不用改代码的方式。当然也是不安全的，万一配置文件被修改了，那不就废了。
+//File file = new File("/");路径
+InputStream in = xx.class.getClassLOarder.getResouceAsStream(String name);那么propertires 文件要放在src/，也就是classes路径下的。
+Properties prop = new Properties();
+prop.Loard(in);
+然后配置文件读取Value根据对应的key值。  prop.getVale("");
+
+Statement creatStatement();
+PreparedStatement preparedStatement();//预编译的statement
+
+
+关于Statement 就是数据库中的语句执行的意思。其使用方法有以下几种。
+boolean execute(String sql);
+int	executeUpdate(String sql); 可以执行insert、update、delete 语句。
+ResultSet executeQuery(String sql) 执行sql查询语句。返回一个结果集。
+
+
+PreparedStatement pstmt = con.prepareStatement("UPDATE EMPLOYEES
+                                     SET SALARY = ? WHERE ID = ?");
+   pstmt.setBigDecimal(1, 153833.00)
+   pstmt.setInt(2, 110592)
+   
+   
+   
+   ResultSet 其实就是与JAVABean中的字段（属性）对应起来。
+   这样就可以用面向对象的思想去处理这些信息了。
