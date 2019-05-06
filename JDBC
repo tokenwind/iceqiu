@@ -28,13 +28,16 @@ foo.bah.Driver  为各个数据库的Driver名。包含包名的。
 The Properties argument can be used to pass arbitrary string tag/value pairs as connection arguments.
 Normally at least "user" and "password" properties should be included in the Properties object.
 
-url 是数据库的安装路径
+url 是数据库的连接方式：
+  jdbc:mysql://localhost:端口/../database？user=  &password= 
+  能够这样操作的原因是因为在安装mysql 的时候，已经将打开的方式放在path路径下了，因此可以直接访问。
+  
 也可以 写在配置文件中作为一个配置参数进行修改，达到后期如果更改后的不用改代码的方式。当然也是不安全的，万一配置文件被修改了，那不就废了。
 //File file = new File("/");路径
 InputStream in = xx.class.getClassLOarder.getResouceAsStream(String name);那么propertires 文件要放在src/，也就是classes路径下的。
 Properties prop = new Properties();
 prop.Loard(in);
-然后配置文件读取Value根据对应的key值。  prop.getVale("");
+然后配置文件读取Value根据对应的key值。  prop.getValue("");
 
 Statement creatStatement();
 PreparedStatement preparedStatement();//预编译的statement
