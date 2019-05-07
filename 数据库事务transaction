@@ -1,0 +1,44 @@
+https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%BA%93/103728?fr=aladdin
+
+transaction：事务 是对数据库的操作：增删改查
+事务（transaction）是用户定义的一个数据库操作序列，这些操作要么全做，要么全不做，是一个不可分割的工作单位。 
+  事务的ACID特性：
+     1   原子性（atomicity）
+     2   一致性（consistency）
+     3   隔离性（isolation）
+     4   持续性（durability）
+ 数据库是如何执行的呢：
+ start transaction； 开启事务
+ commit transaction；提交事务
+ roll back ；回滚
+ 数据在数据库中的存储一般是先存在缓存中，然后事务提交后，永久存在数据库中。
+ 
+ 使用JDBC接口，执行sql 语句可以操作数据库中的记录。但是数据库提供了事务管理功能，也就是对数据库操作的管理功能。
+ 原因是因为在对数据库记录进行操作的时候可能会发生一些问题：脏读，不可重复读 幻读
+ 脏读：可读取未提交的记录。
+ 不可重复读：多次读取数据库中的记录，记录不一致。
+ 幻读：事务1 更改了记录，事务2 重新插入原来的记录，事务1 查看后发现有记录没改，
+  read uncommit   读未提交 解决不了任何问题
+  read  commit    读 提交  避免脏读的情况
+  repeated read   不可重复读  避免脏读和 不可重复读的情况。
+  serializable    串行化操作。可避免以上的情况。
+  级别由低到高。 Connection.setTransaction(int level)  level 就是下面的5个静态常量。
+  API：Package java.sql
+       Interface Connection
+  Modifier and Type	Field	Description
+  static int	TRANSACTION_NONE	
+        A constant indicating that transactions are not supported.
+  static int	TRANSACTION_READ_COMMITTED	
+         A constant indicating that dirty reads are prevented; non-repeatable reads and phantom reads can occur.
+  static int	TRANSACTION_READ_UNCOMMITTED	
+        A constant indicating that dirty reads, non-repeatable reads and phantom reads can occur.
+  static int	TRANSACTION_REPEATABLE_READ	
+        A constant indicating that dirty reads and non-repeatable reads are prevented; phantom reads can occur.
+  static int	TRANSACTION_SERIALIZABLE	
+        A constant indicating that dirty reads, non-repeatable reads and phantom reads are prevented.
+   
+  在使用Connection   connect(String url,Properties info)
+  创建与数据库的连接后，默认情况下connection.setCommit(Boolean commit) commit 为true
+  
+  connection rollback()或者rollback(Savepoint savepoint)
+  
