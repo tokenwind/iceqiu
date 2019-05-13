@@ -1,0 +1,18 @@
+DBUtils的作用是什么：
+DBUtils 是Apache公司对数据库操作的工具类。
+里面主要有QueryRunner 用来执行数据库的增删改查。
+query 查询操作返回的结果ResultSet 里面是在工具类的ResultSetHandle 类里面操作的，这个工具类，可以将其转化为数组，list map  BeanHandle 、、、
+
+org.apache.commons.dbcp2的作用是什么呢：
+是工具类用来在apache服务器上面如何连接数据库的。
+
+JDBC 中有Driver和DataSource 两个接口，这两个接口都可以connection
+DataSource 接口中有两个方法  Connection  getConnection();无参数的。Connection  getConnection(String usename ,String password);
+Driver 接口中的方法是：  Connection	connect(String url, Properties info)
+org.apache.commons.dbcp2
+BasicDataSource  bds = BasicDataSourceFactory.creatDataSource(Properties prop);
+DataSource ds = bds.creatDataSource();
+使用apache 服务器的时候可以使用其提供的工具类
+org.apache.commons.dbutils
+QueryRunner  qr = new QueryRunner(ds);
+不然通过JDBC中的DataSource 也可以创建Connection的实例后，连接数据库。然后使用JDBC的Statement sql 语句执行数据库操作。
